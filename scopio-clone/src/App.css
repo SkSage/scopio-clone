@@ -1,0 +1,28 @@
+.app-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 10px;
+  background-color: #f4f4f4;
+}
+
+.image-viewer {
+  width: 400px;
+  height: 300px;
+  flex: 1;
+  padding: 20px;
+}
+
+.controls button {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+li.active {
+  font-weight: bold;
+  color: blue;
+}
