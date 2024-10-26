@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import ImageMagnify from "react-image-magnify";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import './ImageViewer.css';
 
 function ImageViewer({ src }) {
   const [brightness, setBrightness] = useState(0);
@@ -18,7 +19,7 @@ function ImageViewer({ src }) {
   };
 
   const handleZoomChange = (event) => {
-    setZoomLevel(event.target.value);
+    setZoomLevel(parseFloat(event.target.value));
   };
 
   const handleReset = () => {
@@ -32,65 +33,79 @@ function ImageViewer({ src }) {
   };
 
   const filterStyles = {
-    filter: `brightness(${brightness}%) contrast(${contrast}%)`,
+    filter: `brightness(${100 + parseInt(brightness)}%) contrast(${100 + parseInt(contrast)}%)`,
+    width: '100%',
+    maxWidth: '800px'
   };
 
   useEffect(() => {
-    if (isEditing) {
-      imageRef.current.style.cursor = "crosshair";
-    } else {
-      imageRef.current.style.cursor = "default";
+    if (imageRef.current) {
+      imageRef.current.style.cursor = isEditing ? "crosshair" : "default";
     }
   }, [isEditing]);
 
   return (
     <div>
-      <div>
-        <ImageMagnify
-          imageSrc={src}
-          zoomImageSrc={src}
-          enlargedImagePosition="over"
-          zoomLevel={zoomLevel}
-          className="image-viewer"
-          style={filterStyles}
-          ref={imageRef}
-          // Add event handlers for editing (e.g., onMouseDown, onMouseUp, etc.)
-        />
+      <div className="image-container">
+        <TransformWrapper
+          initialScale={1}
+          minScale={0.5}
+          maxScale={3}
+          defaultPositionX={0}
+          defaultPositionY={0}
+        >
+          <TransformComponent>
+            <img
+              ref={imageRef}
+              src={src}
+              alt="Viewable content"
+              style={filterStyles}
+            />
+          </TransformComponent>
+        </TransformWrapper>
       </div>
 
       <div className="controls">
         <div className="top-controls">
           <button onClick={handleEdit}>Edit</button>
           <button onClick={handleReset}>Reset</button>
-          {/* Add other top controls like zoom in/out, etc. */}
         </div>
-        <label>Brightness:</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          value={brightness}
-          onChange={handleBrightnessChange}
-        />
+        
+        <div className="slider-controls">
+          <div className="control-group">
+            <label>Brightness:</label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              value={brightness}
+              onChange={handleBrightnessChange}
+            />
+          </div>
 
-        <label>Contrast:</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          value={contrast}
-          onChange={handleContrastChange}
-        />
+          <div className="control-group">
+            <label>Contrast:</label>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              value={contrast}
+              onChange={handleContrastChange}
+            />
+          </div>
 
-        <label>Zoom:</label>
-        <input
-          type="range"
-          min="1"
-          max="3"
-          value={zoomLevel}
-          step="0.1"
-          onChange={handleZoomChange}
-        />
+          <div className="control-group">
+            <label>Zoom:</label>
+            <input
+              type="range"
+              min="1"
+              max="3"
+              value={zoomLevel}
+              step="0.1"
+              onChange={handleZoomChange}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

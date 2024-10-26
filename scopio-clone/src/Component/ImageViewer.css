@@ -1,0 +1,87 @@
+.image-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .controls {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 1200px;
+  }
+  
+  .top-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .top-controls button {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .top-controls button:hover {
+    background: #0b5ed7;
+  }
+  
+  .control-group {
+    margin-bottom: 16px;
+  }
+  
+  .control-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #343a40;
+  }
+  
+  .control-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: #dee2e6;
+    border-radius: 3px;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .control-group input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #0d6efd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .control-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #0b5ed7;
+  }
+  
+  /* Add smooth transitions for image adjustments */
+  img {
+    transition: filter 0.3s ease;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .controls {
+      padding: 15px;
+    }
+  
+    .top-controls button {
+      padding: 8px 16px;
+    }
+  }
+  

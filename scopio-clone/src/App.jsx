@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "./Component/Sidebar";
 import ImageViewer from "./Component/ImageViewer";
+import Image from "./assets/wsi.jpg";
 import "./App.css";
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <ImageViewer category={selectedCategory} />
+      <ImageViewer category={selectedCategory} src={Image}/>
     </div>
   );
 }
